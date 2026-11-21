@@ -23,6 +23,6 @@ public class Hotel {
 	private float rating;
 	
 	@Column(name = "available")
-	private boolean isAvailabile;
+	private boolean isAvailable;
 
 }

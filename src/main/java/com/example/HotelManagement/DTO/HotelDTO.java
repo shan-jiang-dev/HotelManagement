@@ -11,5 +11,5 @@ public class HotelDTO {
 	private String city;
 	private int postalCode;
 	private float rating;
-	private boolean isAvailabile;
+	private boolean isAvailable;
 }
