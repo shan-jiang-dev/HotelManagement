@@ -17,7 +17,6 @@ import com.example.HotelManagement.DTO.UpdateHotelAddressDTO;
 import com.example.HotelManagement.Entity.Hotel;
 import com.example.HotelManagement.Service.HotelService;
 
-import jakarta.websocket.server.PathParam;
 
 @RestController
 @RequestMapping("/hotel")
