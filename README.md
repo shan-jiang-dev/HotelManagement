@@ -68,7 +68,7 @@ CREATE DATABASE hotelmanagement;
 
 ### 3. Configure Database Connection
 
-Update `src/main/resources/application.yml` with your MySQL credentials:
+Update `src/main/resources/application.yml` with your MySQL credentials
 
 ### 4. Run the Application
 
