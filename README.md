@@ -15,6 +15,7 @@ A RESTful backend application built with Java and Spring Boot for managing hotel
 | Maven | Dependency management and build automation |
 | Lombok | Boilerplate code reduction |
 | Postman | REST API testing |
+| Spring Security | Authentication and API security |
 
 ## Features
 
@@ -24,26 +25,21 @@ A RESTful backend application built with Java and Spring Boot for managing hotel
 - **Delete Hotels:** Remove hotel records by ID.
 - **Database Persistence:** Store and manage hotel data using MySQL and Spring Data JPA.
 
-## Architecture
+## Security
 
-The application follows a layered architecture to separate responsibilities:
+- **HTTP Basic Authentication using Spring Security.
+- **Username and password authentication.
+- **Authentication required to access protected REST endpoints.
 
-```text
-Client (Postman)
-      |
-      v
-Controller Layer
-      |
-      v
-Repository Layer
-      |
-      v
-Spring Data JPA / Hibernate
-      |
-      v
-MySQL Database
-```
+##Authentication
 
+Spring Security is used to protect the REST APIs through HTTP Basic Authentication.
+
+The default Spring Security configuration generates a username and password when the application starts.
+
+Default username: user
+
+Password: Generated automatically and displayed in the application startup console.
 
 ## Getting Started
 
