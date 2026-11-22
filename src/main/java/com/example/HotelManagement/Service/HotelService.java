@@ -77,7 +77,7 @@ public class HotelService {
 			hotelRepository.deleteById(id);
 		}
 		
-	}
+	} 
 	
 	public Hotel updateHotelAddress(UpdateHotelAddressDTO updateHotelAddressDTO, Long id) {
 	
