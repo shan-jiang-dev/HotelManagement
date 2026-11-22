@@ -3,6 +3,8 @@ package com.example.HotelManagement.Controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -27,8 +29,9 @@ public class HotelController {
 
 	// @RequestBody: De-serialize JSON data(post request from Postman) to java object
 	
+	//@PreAuthorize("hasRole('ADMIN')")
 	@PostMapping("/createhotel")
-	public Hotel createHotel(@RequestBody HotelDTO hotelDTO) {
+	public ResponseEntity<Hotel> createHotel(@RequestBody HotelDTO hotelDTO) {
 		
 		return hotelService.saveHotel(hotelDTO);
 		
@@ -39,15 +42,15 @@ public class HotelController {
 		return hotelService.getAllHotels();
 	}
 	
-	@GetMapping("/gethotel/{id}")
-	public Hotel getHotelById(@PathVariable Long id) {
+	@GetMapping("/getbyid/{id}")
+	public ResponseEntity<Hotel> getHotelById(@PathVariable Long id) {
 		
 		return hotelService.getHotelById(id);
 		
 	}
 	
 	@PutMapping("/updatehotel/{id}")
-	public Hotel updateHotel(@RequestBody HotelDTO hotelDTO, @PathVariable Long id) {
+	public ResponseEntity<Hotel> updateHotel(@RequestBody HotelDTO hotelDTO, @PathVariable Long id) {
 		
 		return hotelService.updateHotel(hotelDTO, id);
 	}

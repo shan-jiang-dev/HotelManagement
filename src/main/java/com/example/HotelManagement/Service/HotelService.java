@@ -3,7 +3,11 @@ package com.example.HotelManagement.Service;
 import java.util.List;
 import java.util.Optional;
 
+import org.apache.coyote.http11.Http11InputBuffer;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.example.HotelManagement.DTO.HotelDTO;
@@ -17,7 +21,7 @@ public class HotelService {
 	@Autowired
 	HotelRepository hotelRepository;
 	
-	public Hotel saveHotel(HotelDTO hotelDTO) {
+	public ResponseEntity<Hotel> saveHotel(HotelDTO hotelDTO) {
 		
 		Hotel hotel = new Hotel();
 		hotel.setName(hotelDTO.getName());
@@ -26,24 +30,29 @@ public class HotelService {
 		hotel.setPostalCode(hotelDTO.getPostalCode());
 		hotel.setRating(hotelDTO.getRating());
 		hotel.setAvailable(hotelDTO.isAvailable());
+		
 		hotelRepository.save(hotel);  
-		return hotel;
+		return new ResponseEntity<Hotel>(hotel, HttpStatus.CREATED);
 	}
 	
 	public List<Hotel> getAllHotels() {
 		return hotelRepository.findAll();
 	}
 	
-	public Hotel getHotelById(Long id) {
+	public ResponseEntity<Hotel> getHotelById(Long id) {
+		
 		Optional<Hotel> hotelBox = hotelRepository.findById(id);
+		
 		if (hotelBox.isPresent()) {
-			return hotelBox.get();
+			return new ResponseEntity<Hotel>(hotelBox.get(), HttpStatus.OK);
 		}
-		return null;
+		return new ResponseEntity<Hotel>(HttpStatus.NO_CONTENT);
 	}
 	
-	public Hotel updateHotel(HotelDTO hotelDTO, Long id) {
-		Hotel hotel = getHotelById(id);
+	public ResponseEntity<Hotel> updateHotel(HotelDTO hotelDTO, Long id) {
+		
+		ResponseEntity<Hotel> response = getHotelById(id);
+		Hotel hotel = response.getBody();
 		
 		if (hotel != null) {
 			hotel.setName(hotelDTO.getName());
@@ -52,26 +61,31 @@ public class HotelService {
 			hotel.setPostalCode(hotelDTO.getPostalCode());
 			hotel.setRating(hotelDTO.getRating());
 			hotel.setAvailable(hotelDTO.isAvailable());
-			return hotelRepository.save(hotel);
-			
+			hotelRepository.save(hotel);
+			return new ResponseEntity<Hotel>(hotel, HttpStatus.OK);
 		}
-		return hotel;
-		
-		
+		return new ResponseEntity<Hotel>(hotel, HttpStatus.NOT_FOUND);
+
 	}
 	
 	public void deleteHotel(Long id) {
-		Hotel hotel = getHotelById(id);
-		if (hotel != null) {
+		
+		Optional<Hotel> hotelBox = hotelRepository.findById(id);
+		Hotel hotel = new Hotel();
+		if (hotelBox.isPresent()) {
+			hotel = hotelBox.get();
 			hotelRepository.deleteById(id);
 		}
+		
 	}
 	
 	public Hotel updateHotelAddress(UpdateHotelAddressDTO updateHotelAddressDTO, Long id) {
+	
+		Optional<Hotel> hotelBox = hotelRepository.findById(id);
+		Hotel hotel = new Hotel();
 		
-		Hotel hotel = getHotelById(id);
-		
-		if (hotel != null) {
+		if (hotelBox.isPresent()) {
+			hotel = hotelBox.get();
 			hotel.setAddress(updateHotelAddressDTO.getAddress());
 			hotel.setCity(updateHotelAddressDTO.getCity());
 			hotel.setPostalCode(updateHotelAddressDTO.getPostalCode());
