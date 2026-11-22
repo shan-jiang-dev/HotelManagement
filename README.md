@@ -27,11 +27,11 @@ A RESTful backend application built with Java and Spring Boot for managing hotel
 
 ## Security
 
-- **HTTP Basic Authentication using Spring Security.
-- **Username and password authentication.
-- **Authentication required to access protected REST endpoints.
+- HTTP Basic Authentication using Spring Security.
+- Username and password authentication.
+- Authentication required to access protected REST endpoints.
 
-##Authentication
+## Authentication
 
 Spring Security is used to protect the REST APIs through HTTP Basic Authentication.
 
