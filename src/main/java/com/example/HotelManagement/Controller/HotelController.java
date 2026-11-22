@@ -28,13 +28,11 @@ public class HotelController {
 	HotelService hotelService;
 
 	// @RequestBody: De-serialize JSON data(post request from Postman) to java object
-	
+	 
 	//@PreAuthorize("hasRole('ADMIN')")
 	@PostMapping("/createhotel")
 	public ResponseEntity<Hotel> createHotel(@RequestBody HotelDTO hotelDTO) {
-		
 		return hotelService.saveHotel(hotelDTO);
-		
 	}
 	
 	@GetMapping("/getallhotels")
@@ -44,20 +42,16 @@ public class HotelController {
 	
 	@GetMapping("/getbyid/{id}")
 	public ResponseEntity<Hotel> getHotelById(@PathVariable Long id) {
-		
 		return hotelService.getHotelById(id);
-		
 	}
 	
 	@PutMapping("/updatehotel/{id}")
 	public ResponseEntity<Hotel> updateHotel(@RequestBody HotelDTO hotelDTO, @PathVariable Long id) {
-		
 		return hotelService.updateHotel(hotelDTO, id);
 	}
 	
 	@DeleteMapping("/deletehotel/{id}")
 	public void deleteHotel(@PathVariable Long id) {
-		
 		hotelService.deleteHotel(id);
 	}
 	
